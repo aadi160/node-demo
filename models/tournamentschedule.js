@@ -1,0 +1,32 @@
+// grab the things we need
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var db=require("../lib/mongoose");
+
+var TournamentSheduleSchema=new Schema({
+    name: { type: String, required: true},
+    tournament_id: { type: String, required: true},
+    tournament_name: { type: String, required: true},
+    prize:{type:String,required:true},
+    created_at: { type: String, default: new Date().getTime()},
+    updated_at: { type: String,default: new Date().getTime()}
+
+});
+
+// the schema is useless so far
+// we need to create a model using it
+var TournamentShedule= db.model('tournamentshedule', TournamentSheduleSchema);
+
+// make this available to our users in our Node applications
+module.exports = TournamentShedule;
+
+// test cases
+if (require.main === module) {
+    (function () {
+        TournamentShedule.create({name:"d",buy_in:"Sd",starting_stack:1233,
+            blind_level:"fddff",blind_interval:"sdsd",late_ent:"zxcx",prize:"sdfd"},function (err,data) {
+           console.log(err || data);
+       })
+    })();
+}
+
